@@ -42,11 +42,11 @@ export function RenderFooter(name) {
 export function RenderBackground(imageURL) {
     document.getElementById("root").innerHTML += `<img id="back-ground-img" src=${imageURL} />`
 }
-export function RenderTextarea() {
-    document.getElementById("root").innerHTML += `<br><textarea style="border-radius:10px;padding : 10px; outline:none" placeholder="Enter your text here" cols="200" rows="10" ></textarea>`
+export function RenderTextarea(id) {
+    document.getElementById("root").innerHTML += `<textarea id=${id} style="border-radius:10px;padding : 10px; outline:none" placeholder="Enter your text here" cols="200" rows="10" ></textarea>`
 }
-export function RenderButton(buttonDescription, id) {
-    document.getElementById("root").innerHTML += `<br><button id=${id}>${buttonDescription}</button><br>`
+export function RenderButton(buttonDescription, id, JSON_OBJECT) {
+    document.getElementById("root").innerHTML += `<button style="font-weight:${JSON_OBJECT.font.weight};font-size:${JSON_OBJECT.font.size};background-color:${JSON_OBJECT.backgroundColor};color:${JSON_OBJECT.color}" id=${id}>${buttonDescription}</button><br>`
 }
 export function RenderSpace(times) {
     for (var i = 0; i < times; i++) {
@@ -54,12 +54,37 @@ export function RenderSpace(times) {
     }
 }
 export function RenderText(text) {
-    document.getElementById("root").innerHTML += `<br><p id="text" style="padding:2%;border-radius:10px">${text === undefined ? "Pass in a text as parameter" : text}</p><br>`
+    document.getElementById("root").innerHTML += `<p id="text" style="padding:2%;border-radius:10px">${text === undefined ? "Pass in a text as parameter" : text}</p><br>`
 }
 export function RenderImage(image, width) {
-    document.getElementById("root").innerHTML += `<br><img src=${image} width=${width}${width.charAt(width.length - 1) === "x" ? "px" : "%"}/>`
+    document.getElementById("root").innerHTML += `<img src=${image} width=${width}${width.charAt(width.length - 1) === "x" ? "px" : "%"}/>`
 }
 
 export function RenderHeader(heading) {
-    document.getElementById("root").innerHTML += `<br><p style="border:1px solid black;width:80%;padding:1%;color:white;background-color:black;font-size:1.2rem;opacity:0.7;text-align:left">${heading}</p>`
+    document.getElementById("root").innerHTML += `<p style="border:1px solid black;width:80%;padding:1%;color:white;background-color:black;font-size:1.2rem;opacity:0.7;text-align:left">${heading}</p>`
+}
+
+export function RenderInput(JSON_OBJECT) {
+    document.getElementById("root").innerHTML += `<input class="inputs" id=${JSON_OBJECT.id} type=${JSON_OBJECT.type} placeholder=${JSON_OBJECT.placeholder} style="font-weight:${JSON_OBJECT.font};width:${JSON_OBJECT.width}" />`
+}
+
+export function RenderLabel(JSON_OBJECT) {
+    document.getElementById("root").innerHTML += `<p style="font-weight:${JSON_OBJECT.font}; color:${JSON_OBJECT.color}; font-size:${JSON_OBJECT.fontSize}px"   id=${JSON_OBJECT.id}>${JSON_OBJECT.text}</p>`
+}
+
+export function RenderList(...List) {
+    document.getElementById("root").innerHTML += `
+    <select style="width:10%;border-radius:10px;padding:10px" id="optionsSelector">
+    </select>`
+    setTimeout(() => {
+        for (var i = 0; i < List.length; i++) {
+            document.getElementById("optionsSelector").innerHTML += `<option id=${List[i]}>${List[i]}</option>`
+        }
+    }, 20)
+}
+
+export function RenderRadioButton(...MENU) {
+    for (var i = 0; i < MENU.length; i++) {
+        document.getElementById("root").innerHTML += `<br><input name="rb" id="${MENU[i]}" type="radio">${MENU[i]}`
+    }
 }
