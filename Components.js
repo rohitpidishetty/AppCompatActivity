@@ -88,3 +88,8 @@ export function RenderRadioButton(...MENU) {
         document.getElementById("root").innerHTML += `<br><input name="rb" id="${MENU[i]}" type="radio">${MENU[i]}`
     }
 }
+
+export function hideElements(id) {
+    document.getElementById(`${id}`).style.visibility = "hidden";
+
+}
