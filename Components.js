@@ -89,7 +89,25 @@ export function RenderRadioButton(...MENU) {
     }
 }
 
+export function RenderCheckboxButton(...MENU) {
+    for (var i = 0; i < MENU.length; i++) {
+        document.getElementById("root").innerHTML += `<br><input name="rb" id="${MENU[i]}" type="checkbox">${MENU[i]}`
+    }
+}
+
 export function hideElements(id) {
     document.getElementById(`${id}`).style.visibility = "hidden";
+
+}
+
+export function wrapComponents(...functions) {
+    document.getElementById("root").innerHTML += `<div id="${functions[0]}"></div>`
+    setTimeout(() => {
+        for (var i = 1; i < functions.length; i++) {
+            var tag = functions[i].split(",")[0];
+            var id = functions[i].split(",")[1];
+            document.getElementById(`${functions[0]}`).innerHTML += `<${tag} id="${id}"><msg id="msgs">Render a &lt;${tag} id = "${id}"&gt; &lt;/${tag}&gt; using javascript DOM, id = "${id}" addEventListener to this id and push content</msg></${tag}><br>`;
+        }
+    }, 20)
 
 }
